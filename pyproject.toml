@@ -1,0 +1,24 @@
+[project]
+name = "fiap-mpeg-uploader"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "gabriwl165",email = "gabrielmarcelino165@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi (>=0.115.6,<0.116.0)",
+    "uvicorn (>=0.34.0,<0.35.0)",
+    "debugpy (>=1.8.11,<2.0.0)",
+    "mypy (>=1.14.1,<2.0.0)",
+    "mypy-ls (>=0.5.1,<0.6.0)",
+    "motor (>=3.6.0,<4.0.0)",
+    "pyjwt (>=2.10.1,<3.0.0)",
+    "boto3 (>=1.36.0,<2.0.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
