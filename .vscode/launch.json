@@ -8,7 +8,7 @@
             "name": "Python Debugger: Main File",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/fiap_mpeg_uploader/main.py",
+            "program": "${workspaceFolder}/fiap_mpeg_uploader/__main__.py",
             "console": "integratedTerminal"
         }
     ]

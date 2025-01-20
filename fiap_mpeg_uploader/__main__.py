@@ -1,5 +1,5 @@
-from fiap_mpeg_uploader.routes.users.main import users_router
-from fiap_mpeg_uploader.routes.pre_signed_url.main import pre_signed_router
+from routes.users.main import users_router
+from routes.pre_signed_url.main import pre_signed_router
 
 from fastapi import FastAPI
 import uvicorn

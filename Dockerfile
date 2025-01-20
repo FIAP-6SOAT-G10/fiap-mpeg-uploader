@@ -6,6 +6,7 @@ RUN pip install poetry
 
 COPY . .
 
+RUN poetry config virtualenvs.create false
 RUN poetry install
 
 EXPOSE 8080
@@ -13,6 +14,4 @@ EXPOSE 8080
 ARG MONGO_URL
 ENV MONGO_URL=${MONGO_URL}
 
-RUN ls
-
-CMD ["python3", "fiap_mpeg_uploader/__main__.py"]
+CMD ["python", "fiap_mpeg_uploader/__main__.py"]

@@ -11,7 +11,7 @@ from typing import Any
 pre_signed_router = APIRouter()
 
 @pre_signed_router.get("/pre-signed-s3")
-async def login(request: Request):
+async def login(request: Request, mime_type: str):
     try:
         auth_header = request.headers.get("Authorization")
         if not auth_header or not auth_header.startswith("Bearer "):
@@ -31,8 +31,10 @@ async def login(request: Request):
         user_db['id'] = str(user_db['_id'])
 
         user: UserDb = UserDb(**user_db)
-        await pre_signed(user)
-        # pre_signed()
-        return JSONResponse(status_code=200, content={"success": True}) 
+        url_pre_signed = await pre_signed(user, mime_type)
+        if not url_pre_signed:
+            return JSONResponse(status_code=401, content={"message": "URL unable to generate!"})
+        
+        return JSONResponse(status_code=200, content={"success": True, "url": url_pre_signed}) 
     except Exception as e:
         print(f"{e!s}")        
