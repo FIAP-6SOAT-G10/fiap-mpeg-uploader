@@ -10,6 +10,10 @@ users_router = APIRouter()
 @users_router.post("/users")
 async def create_users(user: UserDTO):
     try:
+        if not user.email:
+            return JSONResponse(status_code=400, content={"status": "E-mail not found"})
+        if not user.name:
+            return JSONResponse(status_code=400, content={"status": "Name must be provided"})
         ok = await create_user(user)
         if ok:
             return JSONResponse(status_code=201, content={"status": f"created {ok.inserted_id!s}"})

@@ -1,11 +1,12 @@
 from fiap_mpeg_uploader.models.users.user_db import UserDb
 import boto3
 import uuid
+import traceback
 
 async def pre_signed(user: UserDb, mime_type: str):
     try:
-        bucket_name = "fiap-hackathon"
-        folder_name = str(user.id)
+        bucket_name = "buket-fps"
+        folder_name = f"a_processar/{str(user.id)}"
         s3_client = create_s3_client()
         
         if not folder_name.endswith('/'):
@@ -23,7 +24,7 @@ async def pre_signed(user: UserDb, mime_type: str):
         )
         return presigned_url
     except Exception as e:
-        print(f"{e!s}")
+        traceback.print_exc()
 
 
 def create_s3_client(region_name='us-east-1'):

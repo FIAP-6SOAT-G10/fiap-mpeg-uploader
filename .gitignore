@@ -1,3 +1,16 @@
 .env
 .venv
+# Python cache files
+__pycache__/
 **/__pycache__/
+*.py[cod]
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Byte-compiled and optimized files
+*.pyc
+*.pyo
