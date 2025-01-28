@@ -3,5 +3,4 @@ kind: ConfigMap
 metadata:
   name: cm-productions
 data:
-  DB_HOST: svc-postgres
-  DB_NAME: postgres
+  MONGO_URL: svc-postgres
