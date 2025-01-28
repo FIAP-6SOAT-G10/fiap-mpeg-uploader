@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-productions
+  labels:
+    app: productions
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: productions
+  template:
+    metadata:
+      labels:
+        app: productions
+    spec:
+      containers:
+        - name: productions
+          image: gabriwl/hackaton-python-api
+          imagePullPolicy: Always
+          env:
+            - name: MONGO_URL
+              valueFrom:
+                secretKeyRef:
+                  name: secret-productions
+                  key: MONGO_URL
+          envFrom:
+            - configMapRef:
+                name: cm-productions
+          ports:
+            - containerPort: 8080
