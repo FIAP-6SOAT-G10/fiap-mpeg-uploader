@@ -1,5 +1,5 @@
 services:
-  processor:
+  uploader:
     container_name: uploader
     build:
       context: .
