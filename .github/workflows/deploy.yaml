@@ -40,9 +40,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
 
-      - name: Build
-        run: make production
-
       - name: Docker
         run: |
           docker-compose build --build-arg awsAccessKeyId=${{ secrets.AWS_ACCESS_KEY_ID }} --build-arg awsSecretAccessKey=${{ secrets.AWS_SECRET_ACCESS_KEY }} --build-arg awsSessionToken=${{ secrets.AWS_SESSION_TOKEN }} uploader
