@@ -1,8 +1,8 @@
 services:
   processor:
-    container_name: processor
+    container_name: uploader
     build:
       context: .
-    image: 115666561529.dkr.ecr.us-east-1.amazonaws.com/fiap-mpeg-processor:1.0
+    image: 115666561529.dkr.ecr.us-east-1.amazonaws.com/fiap-mpeg-uploader:1.0
     ports:
       - "8080:8080"
