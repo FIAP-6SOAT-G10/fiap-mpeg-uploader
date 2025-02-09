@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-productions
+  name: svc-uploader
 spec:
   type: LoadBalancer
   selector:
-    app: productions
+    app: uploader
   ports:
     - port: 80
       targetPort: 8000
