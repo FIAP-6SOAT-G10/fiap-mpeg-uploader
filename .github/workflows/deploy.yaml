@@ -46,7 +46,7 @@ jobs:
 
       - name: Get Docker Image ID
         id: image_id
-        run: echo "::set-output name=image_id::$(docker images | grep processor | awk '{print $3}' | uniq)"
+        run: echo "::set-output name=image_id::$(docker images | grep uploader | awk '{print $3}' | uniq)"
 
       - name: Get AWS Account ID
         id: aws_account
