@@ -41,8 +41,7 @@ jobs:
       # 4. Run tests and generate coverage report
       - name: Run tests and collect coverage
         run: |
-          coverage run -m pytest
-          coverage xml -o coverage.xml
+          coverage run -append --source=fsutil -m unittest
 
       # 5. Run SonarCloud analysis
       - name: SonarCloud Scan
