@@ -17,11 +17,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Check out the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'  # Change to your preferred version
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Install your project dependencies
+          pip install poetry
+          # Install testing and coverage tools
+          poetry add pytest coverage
+
+      # 4. Run tests and generate coverage report
+      - name: Run tests and collect coverage
+        run: |
+          coverage run -m pytest
+          coverage xml -o coverage.xml
+
+      # 5. Run SonarCloud analysis
       - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          organization: ${{ secrets.SONAR_ORGANIZATION }}
+          projectKey: ${{ secrets.SONAR_PROJECT_KEY }}
+          # Pass additional arguments if needed (here we specify the coverage file)
+          args: >
+            -Dsonar.python.coverage.reportPaths=coverage.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          mvn sonar:sonar -Dsonar.projectKey=FIAP-6SOAT-G10_fiap-mpeg-uploader -Dsonar.organization=fiap-6soat-g10-1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
   build:
     name: Build Docker Image  
