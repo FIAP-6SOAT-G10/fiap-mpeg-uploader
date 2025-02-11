@@ -1,4 +1,5 @@
 from fiap_mpeg_uploader.models.users.user_db import UserDb
+from fiap_mpeg_uploader.infra.env.env import EnvManager
 import boto3
 import uuid
 import traceback
@@ -8,6 +9,11 @@ async def pre_signed(user: UserDb, mime_type: str):
         bucket_name = "processor-in"
         folder_name = f"a_processar/{str(user.id)}"
         s3_client = create_s3_client()
+        env_manager: EnvManager = EnvManager()
+        AWS_ACCESS_KEY_ID = env_manager.get("AWS_ACCESS_KEY_ID")
+        AWS_SECRET_ACCESS_KEY = env_manager.get("AWS_SECRET_ACCESS_KEY")
+        AWS_SESSION_TOKEN = env_manager.get("AWS_SESSION_TOKEN")
+        print(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN)
         
         if not folder_name.endswith('/'):
             folder_name += '/'
