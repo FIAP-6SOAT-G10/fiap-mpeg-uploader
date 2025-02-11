@@ -12,10 +12,11 @@ async def pre_signed(user: UserDb, mime_type: str):
         if not folder_name.endswith('/'):
             folder_name += '/'
         _uuid = str(uuid.uuid1())
-        if mime_type == "video/mp4":
-            _uuid += ".mp4"
-
+        
         folder_name += f"{_uuid}"
+        if mime_type == "video/mp4":
+            folder_name += ".mp4"
+
         s3_client.put_object(Bucket=bucket_name, Key=folder_name)
 
         expiration=3600
@@ -24,9 +25,10 @@ async def pre_signed(user: UserDb, mime_type: str):
             Params={'Bucket': bucket_name, 'Key': folder_name, 'ContentType': mime_type},
             ExpiresIn=expiration,
         )
-        return presigned_url
+        return presigned_url, _uuid
     except Exception as e:
         traceback.print_exc()
+        return None, None
 
 
 def create_s3_client(region_name='us-east-1'):

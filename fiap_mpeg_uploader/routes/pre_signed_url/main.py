@@ -3,8 +3,12 @@ from fastapi.responses import JSONResponse
 from fiap_mpeg_uploader.models.users.user_db import UserDb
 from fiap_mpeg_uploader.infra.db.mongo import MongoClient
 from fiap_mpeg_uploader.routes.pre_signed_url.pre_signed.pre_signed import pre_signed
+from fiap_mpeg_uploader.routes.pre_signed_url.pre_signed.process_protocol import process_protocol
 from fiap_mpeg_uploader.infra.jwt.main import decode_jwt
 from bson import ObjectId
+from fiap_mpeg_uploader.routes.pre_signed_url.models.process_protocol_model import ProcessProtocolRequest
+import traceback
+from pydantic import BaseModel
 from typing import Any
 
 
@@ -31,10 +35,23 @@ async def login(request: Request, mime_type: str):
         user_db['id'] = str(user_db['_id'])
 
         user: UserDb = UserDb(**user_db)
-        url_pre_signed = await pre_signed(user, mime_type)
+        url_pre_signed, protocol_id = await pre_signed(user, mime_type)
         if not url_pre_signed:
             return JSONResponse(status_code=401, content={"message": "URL unable to generate!"})
         
-        return JSONResponse(status_code=200, content={"success": True, "url": url_pre_signed}) 
+        return JSONResponse(status_code=200, content={
+            "success": True, 
+            "url": url_pre_signed,
+            "protocolId": protocol_id
+        }) 
     except Exception as e:
-        print(f"{e!s}")        
+        traceback.print_exc()
+        print(f"{e!s}")  
+
+@pre_signed_router.post("/process")
+async def process(req: ProcessProtocolRequest):
+    try:
+        await process_protocol(req)
+    except Exception as e:
+        traceback.print_exc()
+        print(f"{e!s}")          
