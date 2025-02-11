@@ -5,6 +5,7 @@ from typing import Any
 from bson import ObjectId
 from fiap_mpeg_uploader.routes.pre_signed_url.models.process_protocol_model import ProcessProtocolRequest
 from fiap_mpeg_uploader.infra.env.env import EnvManager
+from fastapi.responses import JSONResponse
 from fiap_mpeg_uploader.infra.db.mongo import MongoClient
 from fiap_mpeg_uploader.models.users.user_db import UserDb
 
@@ -34,5 +35,12 @@ async def process_protocol(req: ProcessProtocolRequest):
         )
         if not response:
             raise Exception(f"Trying to upload message and failed: {body}")
+        return JSONResponse(status_code=500, content={
+            "msg": response
+        }) 
     except Exception as e:
         traceback.print_exc()
+        msg = str(e)
+        return JSONResponse(status_code=500, content={
+            "debug": msg
+        }) 

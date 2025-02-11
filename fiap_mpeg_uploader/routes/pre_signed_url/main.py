@@ -51,7 +51,9 @@ async def login(request: Request, mime_type: str):
 @pre_signed_router.post("/process")
 async def process(req: ProcessProtocolRequest):
     try:
-        await process_protocol(req)
+        response = await process_protocol(req)
+        if response:
+            return response
     except Exception as e:
         traceback.print_exc()
         msg = str(e)
