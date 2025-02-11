@@ -9,16 +9,12 @@ async def pre_signed(user: UserDb, mime_type: str):
         bucket_name = "processor-in"
         folder_name = f"a_processar/{str(user.id)}"
         s3_client = create_s3_client()
-        env_manager: EnvManager = EnvManager()
-        AWS_ACCESS_KEY_ID = env_manager.get("AWS_ACCESS_KEY_ID")
-        AWS_SECRET_ACCESS_KEY = env_manager.get("AWS_SECRET_ACCESS_KEY")
-        AWS_SESSION_TOKEN = env_manager.get("AWS_SESSION_TOKEN")
-        print(f"Credentials: {AWS_ACCESS_KEY_ID} | {AWS_SECRET_ACCESS_KEY} | {AWS_SESSION_TOKEN}")
-        
         if not folder_name.endswith('/'):
             folder_name += '/'
         _uuid = str(uuid.uuid1())
-        print(_uuid)
+        if mime_type == "video/mp4":
+            _uuid += ".mp4"
+
         folder_name += f"{_uuid}"
         s3_client.put_object(Bucket=bucket_name, Key=folder_name)
 
