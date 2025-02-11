@@ -13,7 +13,7 @@ async def pre_signed(user: UserDb, mime_type: str):
         AWS_ACCESS_KEY_ID = env_manager.get("AWS_ACCESS_KEY_ID")
         AWS_SECRET_ACCESS_KEY = env_manager.get("AWS_SECRET_ACCESS_KEY")
         AWS_SESSION_TOKEN = env_manager.get("AWS_SESSION_TOKEN")
-        print(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN)
+        print(f"Credentials: {AWS_ACCESS_KEY_ID} {AWS_SECRET_ACCESS_KEY} {AWS_SESSION_TOKEN}")
         
         if not folder_name.endswith('/'):
             folder_name += '/'
