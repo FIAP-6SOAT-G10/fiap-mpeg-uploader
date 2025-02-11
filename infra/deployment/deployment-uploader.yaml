@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: uploader
-          image: gabriwl/hackaton-python-api
+          image: 115666561529.dkr.ecr.us-east-1.amazonaws.com/fiap-mpeg-uploader
           imagePullPolicy: Always
           env:
             - name: MONGO_URL
