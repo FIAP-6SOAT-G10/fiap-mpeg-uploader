@@ -54,4 +54,7 @@ async def process(req: ProcessProtocolRequest):
         await process_protocol(req)
     except Exception as e:
         traceback.print_exc()
-        print(f"{e!s}")          
+        msg = str(e)
+        return JSONResponse(status_code=500, content={
+            "debug": msg
+        }) 
