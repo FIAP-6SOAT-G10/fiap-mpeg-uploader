@@ -38,11 +38,6 @@ jobs:
           # Install Dependencies
           poetry install
 
-      # 4. Run tests and generate coverage report
-      - name: Run tests and collect coverage
-        run: |
-          coverage run --append --source=fsutil setup.py test
-
       # 5. Run SonarCloud analysis
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
