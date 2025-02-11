@@ -547,6 +547,22 @@ files = [
 typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 
 [[package]]
+name = "pydantic-mongo"
+version = "2.3.0"
+description = "Document object mapper for pydantic and pymongo"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "pydantic_mongo-2.3.0-py2.py3-none-any.whl", hash = "sha256:2974740e7c922db34c39bc9235b13aa13f12526c7b2dc24bd9ca69eebb7c9a20"},
+    {file = "pydantic_mongo-2.3.0.tar.gz", hash = "sha256:d1b05d6bf28e0eeca66809a99c362b958bf6fc6af59350d44d9a948e5fc30e3b"},
+]
+
+[package.dependencies]
+pydantic = ">=2.0.2,<3.0.0"
+pymongo = ">=4.3,<5.0"
+
+[[package]]
 name = "pyjwt"
 version = "2.10.1"
 description = "JSON Web Token implementation in Python"
@@ -987,4 +1003,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.6.3)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10"
-content-hash = "61301e04a04b2bdaafa7496233509c02041aab2644cb5760b5d84f9f23d92f49"
+content-hash = "75be7e9362e06e26b653079655c1588f0265a1f5d6445140bc49c85a87b285ed"
