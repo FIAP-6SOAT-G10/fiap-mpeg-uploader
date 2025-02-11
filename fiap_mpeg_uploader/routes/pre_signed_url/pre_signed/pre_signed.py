@@ -14,8 +14,8 @@ async def pre_signed(user: UserDb, mime_type: str):
         _uuid = str(uuid.uuid1())
         
         folder_name += f"{_uuid}"
-        if mime_type == "video/mp4":
-            folder_name += ".mp4"
+        # if mime_type == "video/mp4":
+        #     folder_name += ".mp4"
 
         s3_client.put_object(Bucket=bucket_name, Key=folder_name)
 
