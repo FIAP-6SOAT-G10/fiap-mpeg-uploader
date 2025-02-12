@@ -7,7 +7,7 @@ import traceback
 async def pre_signed(user: UserDb, mime_type: str):
     try:
         bucket_name = "processor-in"
-        folder_name = f"a_processar/{str(user.id)}"
+        folder_name = f"{str(user.id)}"
         s3_client = create_s3_client()
         if not folder_name.endswith('/'):
             folder_name += '/'
