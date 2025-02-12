@@ -13,7 +13,7 @@ async def pre_signed(user: UserDb, mime_type: str):
             folder_name += '/'
         _uuid = str(uuid.uuid1())
         
-        folder_name += f"{_uuid}"
+        folder_name = f"{_uuid}"
         # if mime_type == "video/mp4":
         #     folder_name += ".mp4"
 
